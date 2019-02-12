@@ -13,7 +13,7 @@
   position: relative;
 }
 
-.answer {
+#answer {
   padding: 3px 0 0 10px;
   width: 98%;
   min-width: 300px;
@@ -22,8 +22,14 @@
   font-size: 16px;
   border: 1px solid rgba(100,100,100,.2);
 }
+
+.error {
+  color: red;
+  font-weight: 200;
+}
+
 .buttons {
-  margin: 50px 0;
+  margin: 20px 0;
   position: relative;
   width: 100%;
 }

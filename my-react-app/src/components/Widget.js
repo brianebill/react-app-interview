@@ -1,5 +1,5 @@
 import React from 'react';
-import './Widget.css';
+import '../styles/styles.css';
 
 class Widget extends React.Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class Widget extends React.Component {
   render() {
     return (
       <div className='outer'>
-        <div className='inner'
+        <form className='inner'
           style={this.state.width > 640 ? {
                 border: '4px solid rgba(166,128,184,1)',
                 padding: '60px'
@@ -38,7 +38,7 @@ class Widget extends React.Component {
                     height: '100px',
                     width: '100px',
                     margin: 'auto',
-                    background: `url(${this.props.image})`,
+                    backgroundImage: `url(${this.props.image})`,
                     backgroundSize: 'cover'
                   }}
                 />
@@ -46,25 +46,38 @@ class Widget extends React.Component {
               <label>
                 <h2 className='question'>{this.props.question}</h2>
                 <input
-                  className='answer'
+                  id='answer'
                   type='text'
                   placeholder={this.props.placeholder}
                   ref={(input) => { this.answer = input }}
+                  value={this.props.answer}
+                  onChange={this.props.handleChange}
                 />
               </label>
 
-              <section className='buttons'>
-                <button className='btn-container back-btn btn'>
-                  { this.props.previousExists ? 'Back' : '' }
-                </button>
+              {this.props.error ? <p className='error'>{this.props.error}</p> : <p>&nbsp;</p>}
 
-                <button className='btn-container next-btn btn'>
-                  { this.props.isLast ? 'Complete' : 'Next' }
-                </button>
+              <section className='buttons'>
+                {this.props.previousExists ?
+                  <input
+                    className='btn-container back-btn btn'
+                    onClick={this.props.handlePrev}
+                    value='Back'
+                    type='submit'
+                  /> : ''
+                }
+
+                <input
+                  className='btn-container next-btn btn'
+                  onClick={this.props.handleNext}
+                  value={ this.props.isLast ? 'Complete' : 'Next' }
+                  type='submit'
+                />
+
               </section>
             </div>
 
-        </div>
+        </form>
       </div>
     );
   }
