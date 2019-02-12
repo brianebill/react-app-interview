@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Widget from './Widget';
-import Summary from './Summary';
 import cards from '../data/cards';
 
 let sortedCards = cards.slice(0);
@@ -34,20 +33,24 @@ class Wizard extends Component {
     } else {
       //allow replacing of answers
       let answers;
-      if (this.state.answers[this.state.current]) { //check to see if current answer exists
+      if (this.state.answers[this.state.current]) { //check to see if current answer exists, handle replace
         answers = this.state.answers; // make copy to eliminate potential side effects
         answers.splice(this.state.current, 1, this.state.answer) // copy new, delete old
+        let complete; //if form has been filled out completely, and user is replacing an answer, return to summary
+        cards.length === this.state.answers.length ? complete = true : complete = false;
+        this.setState((state,props) => ({
+          answers: answers,
+          answer: '',
+          complete: complete
+        }))
+        return
       } else { //no previous answer for this index exists
         answers = this.state.answers.concat(this.state.answer)
+        this.setState((state,props) => ({
+          answers: answers,
+          answer: ''
+        }))
       }
-      //check to see if user is circling back from summary
-      let complete;
-      cards.length === this.state.answers.length ? complete = true : complete = false;
-      this.setState((state,props) => ({
-        answers: answers,
-        answer: '',
-        complete: complete
-      }))
     }
     if (cards.length - 1 === this.state.current) {
       this.setState(function(state, props) {
@@ -75,7 +78,6 @@ class Wizard extends Component {
   }
 
   handleClick(e) {
-    //console.log(e.target.id)
     let index = e.target.id;
     this.setState(function(state, props) {
       return {
@@ -88,12 +90,7 @@ class Wizard extends Component {
   render() {
     return (
       <div>
-        {this.state.complete ?
-            <Summary
-              answers={this.state.answers}
-              handleClick={e => this.handleClick(e)}
-            />
-          : <Widget
+        <Widget
             question={sortedCards[this.state.current].question}
             answer={this.state.answer}
             handleChange={ e => this.handleChange(e) }
@@ -103,10 +100,10 @@ class Wizard extends Component {
             handleNext={ e => this.handleNext(e) }
             handlePrev={ e => this.handlePrev(e) }
             error={this.state.error}
+            complete={this.state.complete}
+            answers={this.state.answers}
+            handleClick={e => this.handleClick(e)}
           />
-        }
-
-
       </div>
     );
   }

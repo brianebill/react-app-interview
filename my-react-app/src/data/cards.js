@@ -8,7 +8,7 @@ export default [
   },
   {
     "order": 1,
-    "question": `Did you have any major medical costs in 2018?`,
+    "question": `Any major medical costs in 2018?`,
     "placeholder": "Enter estimated total or no",
     "image": "https://github.com/jamesarmenta/react-app-interview/raw/master/images/icon-audit-support-retina.png",
     "alt": "Audit Support"
