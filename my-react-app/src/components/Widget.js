@@ -43,19 +43,21 @@ class Widget extends React.Component {
                   }}
                 />
 
-              <label>
-                <h2 className='question'>{this.props.question}</h2>
-                <input
-                  id='answer'
-                  type='text'
-                  placeholder={this.props.placeholder}
-                  ref={(input) => { this.answer = input }}
-                  value={this.props.answer}
-                  onChange={this.props.handleChange}
-                />
-              </label>
+                <div style={{ maxWidth: '497px' }}>
+                  <label>
+                    <h2 className='question'>{this.props.question}</h2>
+                    <input
+                      id='answer'
+                      type='text'
+                      placeholder={this.props.placeholder}
+                      ref={(input) => { this.answer = input }}
+                      value={this.props.answer}
+                      onChange={this.props.handleChange}
+                    />
+                  </label>
 
-              {this.props.error ? <p className='error'>{this.props.error}</p> : <p>&nbsp;</p>}
+                  {this.props.error ? <p className='error'>{this.props.error}</p> : <p>&nbsp;</p>}
+                </div>
 
               <section className='buttons'>
                 <input
