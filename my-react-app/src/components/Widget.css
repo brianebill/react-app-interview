@@ -1,0 +1,75 @@
+.outer {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.inner {
+  flex: none;
+  width: 80%;
+  max-width: 572px;
+  text-align: center;
+  position: relative;
+}
+
+.answer {
+  padding: 3px 0 0 10px;
+  width: 98%;
+  min-width: 300px;
+  min-height: 40px;
+  height: 40px;
+  font-size: 16px;
+  border: 1px solid rgba(100,100,100,.2);
+}
+.buttons {
+  margin: 50px 0;
+  position: relative;
+  width: 100%;
+}
+
+.btn {
+  width: 100px;
+  height: 40px;
+  font-size: 12px;
+}
+
+.back-btn {
+  float: left;
+  background: rgba(248,206,204,1);
+  border: 2px solid rgba(219,169,167,1);
+  position: relative;
+  outline: none;
+  cursor: pointer;
+}
+.back-btn:after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -4px;
+  background: rgba(184,84,80,1);
+  z-index: -1;
+  outline: 1px solid rgba(219,169,167,1);
+}
+
+.next-btn {
+  float: right;
+  background: rgba(213,232,212,1);
+  position: relative;
+  border: 2px solid rgba(192,217,178,1);
+  outline: none;
+  cursor: pointer;
+}
+.next-btn:after {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: rgba(130,179,102,1);
+  z-index: -1;
+  outline: 1px solid rgba(192,217,178,1);
+}
