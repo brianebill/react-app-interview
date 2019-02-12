@@ -18,6 +18,7 @@ class Wizard extends Component {
     }
     this.handleNext = this.handleNext.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
+    this.handleClick = this.handleClick.bind(this)
   }
 
   handleChange(e) {
@@ -31,16 +32,21 @@ class Wizard extends Component {
       setTimeout(() => { this.setState({ error: '' })}, 2000)
       return
     } else {
+      //allow replacing of answers
       let answers;
-      if (this.state.answers[this.state.current]) {
-        answers = this.state.answers;
-        answers.splice(this.state.current, 1, this.state.answer)
-      } else {
+      if (this.state.answers[this.state.current]) { //check to see if current answer exists
+        answers = this.state.answers; // make copy to eliminate potential side effects
+        answers.splice(this.state.current, 1, this.state.answer) // copy new, delete old
+      } else { //no previous answer for this index exists
         answers = this.state.answers.concat(this.state.answer)
       }
+      //check to see if user is circling back from summary
+      let complete;
+      cards.length === this.state.answers.length ? complete = true : complete = false;
       this.setState((state,props) => ({
         answers: answers,
-        answer: ''
+        answer: '',
+        complete: complete
       }))
     }
     if (cards.length - 1 === this.state.current) {
@@ -62,8 +68,20 @@ class Wizard extends Component {
     e.preventDefault();
     this.setState(function(state, props) {
       return {
-        current: this.state.current - 1
+        current: this.state.current - 1,
+        answer: ''
       };
+    });
+  }
+
+  handleClick(e) {
+    //console.log(e.target.id)
+    let index = e.target.id;
+    this.setState(function(state, props) {
+      return {
+        complete: false,
+        current: index
+      }
     });
   }
 
@@ -71,7 +89,10 @@ class Wizard extends Component {
     return (
       <div>
         {this.state.complete ?
-            <Summary answers={this.state.answers} />
+            <Summary
+              answers={this.state.answers}
+              handleClick={e => this.handleClick(e)}
+            />
           : <Widget
             question={sortedCards[this.state.current].question}
             answer={this.state.answer}

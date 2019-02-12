@@ -37,10 +37,16 @@ class Summary extends Component {
           <div style={{ minHeight: '100px'}}>
             <img src='https://s3-us-west-2.amazonaws.com/beb-ui/tenor.gif' alt='funny dancing celebration' />
           </div>
+          <h2>Summary</h2>
           <ol style={{ listStyle: 'none' }}>
             {this.props.answers.map((a,i) => (
-              <li key={a}>
-                <span style={{ color: 'rgba(100,100,100,1)' }}>{cards[i].question}</span>: <strong>{a}</strong>
+              <li
+                id={i}
+                key={a}
+                style={{ cursor: 'pointer' }}
+                onClick={this.props.handleClick}
+              >
+                <span id={i} style={{ color: 'rgba(100,100,255,1)' }}>{cards[i].question}</span> <strong>{a}</strong>
               </li>
             ))}
           </ol>
