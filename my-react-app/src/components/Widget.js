@@ -58,6 +58,13 @@ class Widget extends React.Component {
               {this.props.error ? <p className='error'>{this.props.error}</p> : <p>&nbsp;</p>}
 
               <section className='buttons'>
+                <input
+                  className='btn-container next-btn btn'
+                  onClick={this.props.handleNext}
+                  value={ this.props.isLast ? 'Complete' : 'Next' }
+                  type='submit'
+                />
+
                 {this.props.previousExists ?
                   <input
                     className='btn-container back-btn btn'
@@ -66,13 +73,6 @@ class Widget extends React.Component {
                     type='submit'
                   /> : ''
                 }
-
-                <input
-                  className='btn-container next-btn btn'
-                  onClick={this.props.handleNext}
-                  value={ this.props.isLast ? 'Complete' : 'Next' }
-                  type='submit'
-                />
 
               </section>
             </div>
