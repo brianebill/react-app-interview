@@ -35,7 +35,7 @@ class Summary extends Component {
           }
         >
           <div style={{ minHeight: '100px'}}>
-            <img src='https://s3-us-west-2.amazonaws.com/beb-ui/tenor.gif' />
+            <img src='https://s3-us-west-2.amazonaws.com/beb-ui/tenor.gif' alt='funny dancing celebration' />
           </div>
           <ol style={{ listStyle: 'none' }}>
             {this.props.answers.map((a,i) => (
